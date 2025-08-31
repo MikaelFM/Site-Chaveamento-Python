@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/competicao.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chaveamento.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=trophy" />
+</head>
+<body>
+    <div id="app">
+        <content class="text-center">
+            <div class="text-center" style="display: flex; flex-direction: column; align-items: center">
+                <img class="logo-competicao" style="width: 15vw; height: 15vw" :src="competicao.img">
+                <h2 style="color: #ececec; margin-top: 2vh; font-weight: 600">[[competicao.nome]]</h2>
+                <p style="color: white; font-size: 1.2vw; margin-top: 0">[[descCompeticao]]</p>
+                <div class="competition-teams" style="margin-top: 2vh">
+                    <img v-for="time in competicao.times" :src="time.img" width="60">
+                </div>
+                <div class="field div-submit" style="margin-top: 3vh">
+                    <input v-if="!isCompeticaoSorteada && !isCompeticaoSimulada" class="submit-button" type="submit" placeholder=" " value="Sortear" @click.prevent="sortear()"/>
+                    <input v-if="isCompeticaoSorteada && !isCompeticaoSimulada" class="submit-button" type="submit" placeholder=" " value="Simular" @click.prevent="simular()"/>
+                </div>
+                <div class="competition" v-if="isCompeticaoSorteada">
+                  <div v-for="(fase, index) in fases" :class="['fase', 'fase-' + (getNumFaseInicial + index)]">
+                    <div class="confront" v-for="confronto in fase.confrontos">
+                      <div class="flex">
+                        <div :class="['team1', 'team', {'classified': confronto.time1.nome === confronto?.vencedor?.nome}]">
+                          <img :src="confronto.time1.img" alt="">
+                          <p>[[confronto.time1.nome]]</p>
+                          <div class="result" v-if="isCompeticaoSimulada">
+                            <div class="placar"  v-if="confronto.jogos.length > 1" v-for="jogo in confronto.jogos">
+                              <p>[[jogo.gols_time_a]]</p>
+                            </div>
+                            <div class="placar">
+                              <p>[[confronto.total_time_a]]</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div :class="['team2', 'team', {'classified': confronto.time2.nome === confronto?.vencedor?.nome}]">
+                          <img
+                            :src="confronto.time2.img"
+                            alt="">
+                          <p>[[confronto.time2.nome]]</p>
+                          <div class="result" v-if="isCompeticaoSimulada">
+                            <div class="placar" v-if="confronto.jogos.length > 1" v-for="jogo in confronto.jogos">
+                              <p>[[jogo.gols_time_b]]</p>
+                            </div>
+                            <div class="placar">
+                              <p>[[confronto.total_time_b]]</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </content>
+    </div>
+    <script>
+        const competicao = {{ competicao | tojson }};
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="{{ url_for('static', filename='js/components.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/competicao_view.js') }}"></script>
+</body>
+</html>

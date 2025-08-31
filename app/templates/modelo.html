@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Chaveamento de Torneio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    .tournament {
+      display: flex;
+      gap: 60px;
+      position: relative;
+    }
+
+    .round {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .round-title {
+      font-weight: bold;
+      margin-bottom: 20px;
+      background: #007bff;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .match {
+      background: white;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 40px 0;
+      width: 160px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Linhas horizontais que ligam para a direita */
+    .match::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      width: 30px;
+      height: 2px;
+      background: #007bff;
+    }
+
+    /* Linhas verticais que ligam pares de jogos */
+    .connector {
+      position: absolute;
+      width: 2px;
+      background: #007bff;
+      right: -30px;
+      z-index: -1;
+    }
+
+    /* Ajustes manuais para cada rodada */
+
+    /* Quartas: conectando cada 2 jogos das oitavas */
+    .quartas .match:nth-child(1)::before,
+    .quartas .match:nth-child(2)::before,
+    .quartas .match:nth-child(3)::before,
+    .quartas .match:nth-child(4)::before {
+      content: "";
+      position: absolute;
+      height: 82px;
+      top: -41px;
+      right: -30px;
+      width: 2px;
+      background: #007bff;
+    }
+
+    /* Semis: conectando cada 2 jogos das quartas */
+    .semis .match:nth-child(1)::before,
+    .semis .match:nth-child(2)::before {
+      content: "";
+      position: absolute;
+      height: 162px;
+      top: -81px;
+      right: -30px;
+      width: 2px;
+      background: #007bff;
+    }
+
+    /* Final: conectando os 2 jogos da semi */
+    .final .match::before {
+      content: "";
+      position: absolute;
+      height: 322px;
+      top: -161px;
+      right: -30px;
+      width: 2px;
+      background: #007bff;
+    }
+
+    /* Remove linha para final */
+    .final .match::after {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Chaveamento do Torneio</h2>
+
+  <div class="tournament">
+    <!-- Oitavas -->
+    <div class="round oitavas">
+      <div class="round-title">Oitavas</div>
+      <div class="match">Time 1 vs Time 2</div>
+      <div class="match">Time 3 vs Time 4</div>
+      <div class="match">Time 5 vs Time 6</div>
+      <div class="match">Time 7 vs Time 8</div>
+      <div class="match">Time 9 vs Time 10</div>
+      <div class="match">Time 11 vs Time 12</div>
+      <div class="match">Time 13 vs Time 14</div>
+      <div class="match">Time 15 vs Time 16</div>
+    </div>
+
+    <!-- Quartas -->
+    <div class="round quartas">
+      <div class="round-title">Quartas</div>
+      <div class="match">Vencedor 1</div>
+      <div class="match">Vencedor 2</div>
+      <div class="match">Vencedor 3</div>
+      <div class="match">Vencedor 4</div>
+    </div>
+
+    <!-- Semis -->
+    <div class="round semis">
+      <div class="round-title">Semifinal</div>
+      <div class="match">Vencedor A</div>
+      <div class="match">Vencedor B</div>
+    </div>
+
+    <!-- Final -->
+    <div class="round final">
+      <div class="round-title">Final</div>
+      <div class="match">Final</div>
+    </div>
+  </div>
+
+</body>
+</html>

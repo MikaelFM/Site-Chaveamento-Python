@@ -1,0 +1,305 @@
+@import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body {
+    background-color: #1A1A1E;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#app {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+content {
+    height: 100vh;
+    flex: 1;
+    padding: 5vw;
+}
+
+#teams {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1vw;
+}
+
+
+
+.field {
+  position: relative;
+  padding-top: 13px;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+}
+
+.field input:not([type="checkbox"]), .field select {
+    width: 30vw;
+    background-color: #1A1A1E;
+    border: 1px solid #444444;
+    border-radius: 5px;
+    outline: none;
+    /* min-width: 250px; */
+    padding: 1vw 1.25vw;
+    font-size: 1vw;
+    transition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    -webkit-appearance: none;
+    color: white;
+}
+
+.field input:not([type="checkbox"]) {
+    width: 30.4vw;
+}
+
+.field select {
+    width: 33vw;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.field input:not([type="checkbox"]):focus, .field select:focus {
+  border: 0.2vw solid #ffffff;
+}
+
+.field input:not([type="checkbox"])::placeholder {
+  color: transparent;
+}
+
+.field label:not(.label-checkbox) {
+  pointer-events: none;
+  position: absolute;
+  top: calc(50% - 0.6vw);
+  left: 0.75vw;
+  transition: all .1s linear;
+  -webkit-transition: all .1s linear;
+  -moz-transition: all .1s linear;
+  background-color: #1A1A1E;
+  padding: 0.75vw;
+  box-sizing: border-box;
+    font-size: 1vw;
+}
+
+.field input[type=submit] {
+    width: 7vw;
+    padding: 0.75vw 0;
+}
+
+.div-submit.field input[type=submit]:not(.submit-button):hover {
+    background-color: #444444;
+}
+
+.field .submit-button {
+    background-color: #110070 !important;
+    border: 1px solid #110070;
+    font-size: 1vw;
+}
+.field .submit-button:hover {
+    background-color: rgba(8, 0, 69, 0.93) !important;
+}
+
+.field .submit-button:disabled {
+    background-color: #272727 !important;
+    cursor: not-allowed;
+}
+
+.field input:required:invalid+label {
+  color: red;
+}
+
+.field input:focus:required:invalid {
+  border: 2px solid red;
+}
+
+.field input:required:invalid+label:before {
+  content: '*';
+}
+
+.field input:focus+label,
+.field input:not(:placeholder-shown)+label,
+.field label.active,
+.multiselect.active label
+{
+  font-size: 1vw;
+  top: -0vw;
+  color: white;
+}
+
+form {
+    display: flex;
+    gap: 3vw;
+    justify-content: center;
+    padding-top: 4vh;
+}
+
+form .right {
+    margin-top: 15px;
+}
+
+form .right .photo {
+    margin-top: 16vh;
+    width: 12vw;
+    height: 12vw;
+    border: 0.18vw solid #444444;
+    border-radius: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+form .right .photo:focus-within {
+    border: 0.15vw solid #ffffff;
+}
+
+form .div-submit {
+    margin-top: 2vw;
+}
+
+h1 {
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 7vh;
+    font-size: 2.2vw;
+}
+
+.competition-teams {
+    display: flex;
+    justify-content: center;
+    gap: 1vw;
+    /*max-width: 30vw;*/
+    flex-wrap: wrap;
+}
+
+.competition-teams img {
+    height: 3vw;
+    width: 3vw;
+    gap: 1vw;
+}
+
+
+.multiselect {
+    padding: 0.5vw 1vw;
+    font-size: 1vw;
+    border: 1px solid #444444;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 30.9vw;
+    min-height: 2.3vw;
+}
+
+.multiselect.error {
+    border: 1px solid #b50000;
+}
+
+.multiselect input {
+    flex: 1;
+    height: 1.8vw;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    min-width: 10px;
+}
+
+.multiselect p {
+    padding: 1vw 1.25vw;
+    margin: 0;
+}
+
+.multiselect.active .multiselect-options {
+    display: block;
+}
+
+.multiselect-options {
+    display: none;
+    background-color: #1A1A1E;
+    position: absolute;
+    max-height: 20vh;
+    overflow: scroll;
+    z-index: 100;
+    width: 32.9vw;
+    border: 1px solid #444444;
+    border-top: none;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.multiselect input:not([type="checkbox"]), .multiselect input:not([type="checkbox"]):focus {
+    border: none;
+}
+
+.multiselect.active {
+    border-color: white;
+    border-bottom: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.multiselect.active + .multiselect-options {
+    border-color: white;
+    display: block;
+}
+
+.multiselect-options .label-checkbox {
+    font-size: 1vw;
+    width: 100%;
+}
+
+.multiselect-options ul {
+    margin: 0;
+    padding: 0;
+}
+
+.multiselect-options ul li {
+    font-size: 1vw;
+    padding: 0.75vw 1vw;
+    text-decoration: none;
+    list-style: none;
+    border-bottom: 0.1px solid #3e3e3e;
+}
+.multiselect-options ul li:hover {
+    background-color: #444444;
+}
+
+
+.multiselect-options .label-checkbox input {
+    height: 1vw;
+}
+
+.multiselect .option-selected p {
+    font-size: 1vw;
+    padding: 0 0.5vw;
+}
+
+.multiselect .option-selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3e3e3e;
+    height: 1.8vw;
+    border-radius: 2px;
+    margin: 0.2vw;
+    z-index: 999;
+}
+
+.multiselect .option-selected button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 0.8vw;
+    font-family: Arial, sans-serif;
+    color: #b1b1b1;
+}
+
+.multiselect .option-selected button:hover {
+    color: white;
+}

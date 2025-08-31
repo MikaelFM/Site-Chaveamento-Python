@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=trophy" />
+</head>
+<body>
+    <div id="app">
+        <vue-navbar></vue-navbar>
+        <content>
+            <section class="content-header">
+                <div class="search">
+                    <input type="text" v-model="txt_busca">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <a href="/time/edit/">
+                    <button class="new" @click="edit('')">Novo</button>
+                </a>
+            </section>
+            <div id="teams">
+                <div class="card-team" v-for="(time, index) in timesFiltrados">
+                    <div class="image">
+                        <div class="d-img">
+                            <img :src="time.img" alt="">
+                        </div>
+                        <div class="infos">
+                            <p>[[ time.nome ]]</p>
+                            <div class="actions">
+                                <a :href="'/time/edit/' + index"><button class="action edit" @click="edit(index)">Editar</button></a>
+                                <a :href="'/time/delete/' + index"><button class="action delete" @click="exclude(index)">Excluir</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </content>
+    </div>
+    <script>
+        const times = {{ times | tojson }};
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="{{ url_for('static', filename='js/components.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/times.js') }}"></script>
+</body>
+</html>
